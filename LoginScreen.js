@@ -1,14 +1,15 @@
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     // Handle login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
   };
 
   const handleSignUp = () => {
@@ -21,10 +22,9 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Email"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={(value) => setEmail(value)}
+          placeholder="Username"
+          value={username}
+          onChangeText={text => setUsername(text)}
         />
         <TextInput
           style={styles.input}

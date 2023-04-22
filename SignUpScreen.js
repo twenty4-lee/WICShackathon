@@ -1,39 +1,40 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Picker } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-const SignUpScreen = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState("Student");
+const SignUpScreen = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSignUp = () => {
-    // handle sign-up logic
-    console.log("Signing up...");
+    if (!username || !password || !confirmPassword) {
+      alert('Please fill in all the fields.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+    // Perform sign-up logic here
+    alert('You have successfully signed up!');
+    navigation.navigate('Login');
   };
+  
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
       <TextInput
         style={styles.input}
-        placeholder="Name"
-        onChangeText={(text) => setName(text)}
-        value={name}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-        keyboardType="email-address"
+        placeholder="Username"
+        onChangeText={text => setUsername(text)}
+        value={username}
         autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={text => setPassword(text)}
         value={password}
         secureTextEntry
         autoCapitalize="none"
@@ -41,22 +42,11 @@ const SignUpScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Confirm Password"
-        onChangeText={(text) => setConfirmPassword(text)}
+        onChangeText={text => setConfirmPassword(text)}
         value={confirmPassword}
         secureTextEntry
         autoCapitalize="none"
       />
-      <View style={styles.pickerContainer}>
-        <Text style={styles.pickerLabel}>I am a:</Text>
-        <Picker
-          style={styles.picker}
-          selectedValue={role}
-          onValueChange={(itemValue) => setRole(itemValue)}
-        >
-          <Picker.Item label="Student" value="Student" />
-          <Picker.Item label="Teacher" value="Teacher" />
-        </Picker>
-      </View>
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
@@ -67,50 +57,38 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 28,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
   },
   input: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
     marginVertical: 10,
   },
   button: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    backgroundColor: "#007AFF",
+    backgroundColor: '#007AFF',
     borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 20,
   },
   buttonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 18,
-    fontWeight: "bold",
-  },
-  pickerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 10,
-  },
-  pickerLabel: {
-    fontSize: 18,
-    marginRight: 10,
-  },
-  picker: {
-    flex: 1,
+    fontWeight: 'bold',
   },
 });
 
