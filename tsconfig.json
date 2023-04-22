@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "typeRoots": ["types.ts", "./node_modules/@types"],
+    "lib": ["dom", "esnext"],
+    "paths": {
+      "@types/*": ["node_modules/@types/*"]
+    }
+  },
+  "include": ["src", "typings"],
+  
+}
