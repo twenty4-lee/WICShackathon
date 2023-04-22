@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 export default function GameScreen() {
   const [goalNumber, setGoalNumber] = useState(0);
   const [cards, setCards] = useState([]);
+  const [result, setResult] = useState([]);
 
   // generate a random number between 1 and 16 for the goal number
   useEffect(() => {
@@ -24,10 +25,24 @@ export default function GameScreen() {
 
   const handleCardPress = (number) => {
     // TODO: implement card press logic
+    const newResult = [...result, number];
+    setResult(newResult);
+    const newCards = [...cards];
+    const cardIndex = newCards.indexOf(number);
+    if (cardIndex !== -1) {
+        newCards.splice(cardIndex, 1);
+        setCards(newCards);
+    }
+
   };
 
   return (
     <View style={styles.container}>
+    <View style={styles.resultContainer}>
+        {result.map((number, index) => (
+        <Text key={index} style={styles.resultText}>{number}</Text>
+        ))}
+        </View>
       <Text style={styles.title}>Make {goalNumber} with the cards</Text>
       <View style={styles.cardContainer}>
         <TouchableOpacity style={styles.card}>
@@ -45,17 +60,60 @@ export default function GameScreen() {
           </TouchableOpacity>
         ))}
       </View>
+      <View style={styles.cardContainer}>
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => handleCardPress("+")}
+        >
+          <Text style={styles.cardText}>+</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => handleCardPress("-")}
+        >
+          <Text style={styles.cardText}>-</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => handleCardPress("x")}
+        >
+          <Text style={styles.cardText}>x</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => handleCardPress("/")}
+        >
+          <Text style={styles.cardText}>/</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+    resultContainer: {
+        width: '100%',
+        height: 50,
+        backgroundColor: '#eee',
+        marginBottom: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      },
+      
+      
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  resultText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  
   title: {
     fontSize: 24,
     marginBottom: 30,
