@@ -66,6 +66,10 @@ export default function GameScreen() {
     setCards([...cards,calculatedResult]);
   };
 
+ const clearResult = () => {
+  setResult([]);
+}
+
   return (
   <View style={styles.container}>
     <View style={styles.resultContainer}>
@@ -73,7 +77,7 @@ export default function GameScreen() {
     <Text key={index} style={styles.resultText}>{number}</Text>
   ))}
 <View style={styles.submitBtnContainer}>
-  <TouchableOpacity style={styles.saveBtn} onPress={() => { calculateResult(); handleSave(setCards, cards); }}>
+  <TouchableOpacity style={styles.saveBtn} onPress={() => { clearResult(); handleSave(setCards, cards); }}>
     <Text style={styles.saveBtnText}>Save</Text>
   </TouchableOpacity>
   <TouchableOpacity style={styles.submitBtn} onPress={() => { handleSubmit(); }}>
