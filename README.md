@@ -11,8 +11,8 @@
 **Instruction**:
 
   1.	The computer displays a set of 5 cards within the range of 1-16. 
-  2.	A target card is shown.
-  3.	Make an equation such that, at the end, the number on the target card is displayed.
+  2.	A target number is shown.
+  3.	Make an equation such that, at the end, the number on the target card should be equal to the equation made.
 
 **Features**: 
 
