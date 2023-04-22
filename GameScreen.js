@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function GameScreen() {
   const [goalNumber, setGoalNumber] = useState(0);
-  
   const [cards, setCards] = useState([]);
   const [result, setResult] = useState([]);
 
@@ -17,8 +16,9 @@ export default function GameScreen() {
     const randomNumbers = [];
     while (randomNumbers.length < 6) {
       const number = Math.floor(Math.random() * 16) + 1;
+      if (!randomNumbers.includes(number)) {
         randomNumbers.push(number);
-      
+      }
     }
     setCards(randomNumbers);
   }, []);
@@ -46,7 +46,6 @@ export default function GameScreen() {
     const expression = result.join('');
     const answer = eval(expression);
     setResult([answer]);
-    return answer;
   };
 
   const checkResult = (calculatedResult, goalNumber) => {
@@ -61,26 +60,11 @@ export default function GameScreen() {
     const calculatedResult = eval(result.join(''));
     checkResult(calculatedResult, goalNumber);
   };
-
-  const handleSave = (setCards,cards) => {
+  
+  const handleSave = (setCards, cards) => {
     const calculatedResult = eval(result.join(''));
-    //setCards.push(calculatedResult);
     setCards([...cards,calculatedResult]);
   };
-
-  const checkSave = (calculatedResult) => {
-    return(
-    <View style={styles.cardContainer}>
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => handleCardPress({calculatedResult})}
-    >
-      <Text style={styles.cardText}>{calculatedResult}</Text>
-    </TouchableOpacity>
-    </View >
-    )
-  }; 
-  
 
   return (
   <View style={styles.container}>
@@ -89,8 +73,7 @@ export default function GameScreen() {
     <Text key={index} style={styles.resultText}>{number}</Text>
   ))}
 <View style={styles.submitBtnContainer}>
-
-  <TouchableOpacity style={styles.saveBtn} onPress={() => { handleSave(setCards,cards); }}>
+  <TouchableOpacity style={styles.saveBtn} onPress={() => { calculateResult(); handleSave(setCards, cards); }}>
     <Text style={styles.saveBtnText}>Save</Text>
   </TouchableOpacity>
   <TouchableOpacity style={styles.submitBtn} onPress={() => { handleSubmit(); }}>
