@@ -70,10 +70,13 @@ export default function GameScreen() {
     <Text key={index} style={styles.resultText}>{number}</Text>
   ))}
 <View style={styles.submitBtnContainer}>
-    <TouchableOpacity style={styles.submitBtn} onPress={() => { calculateResult(); handleSubmit(); }}>
-        <Text style={styles.submitBtnText}>Submit</Text>
-    </TouchableOpacity>
-        </View>
+  <TouchableOpacity style={styles.saveBtn} onPress={() => { calculateResult() }}>
+    <Text style={styles.saveBtnText}>Save</Text>
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.submitBtn} onPress={() => { calculateResult(); handleSubmit(); }}>
+    <Text style={styles.submitBtnText}>Submit</Text>
+  </TouchableOpacity>
+</View>
 </View>
       <Text style={styles.title}>Make {goalNumber} with the cards</Text>
       <View style={styles.cardContainer}>
@@ -123,12 +126,6 @@ export default function GameScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'white'
-      },
     resultContainer: {
         width: '100%',
         height: 50,
@@ -139,6 +136,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
       },
       submitBtnContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         marginLeft: 'auto',
       },
       submitBtn: {
@@ -151,6 +150,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
       },
+      saveBtn: {
+        backgroundColor: 'gray',
+        borderRadius: 5,
+        padding: 10,
+        marginRight: 10,
+      },
+      saveBtnText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 16,
+      },
+      
       
   container: {
     flex: 1,
