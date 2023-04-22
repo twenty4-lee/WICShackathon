@@ -73,7 +73,7 @@ export default function GameScreen() {
   <TouchableOpacity style={styles.saveBtn} onPress={() => { calculateResult() }}>
     <Text style={styles.saveBtnText}>Save</Text>
   </TouchableOpacity>
-  <TouchableOpacity style={styles.submitBtn} onPress={() => { calculateResult(); handleSubmit(); }}>
+  <TouchableOpacity style={styles.submitBtn} onPress={() => { handleSubmit(); }}>
     <Text style={styles.submitBtnText}>Submit</Text>
   </TouchableOpacity>
 </View>
