@@ -16,4 +16,5 @@
 
 **Features**: 
 
-    Skip button which gives a hint to solve the problem
+  1. Providing seperate workspace for teachers--to check the progress of the student--and students--to do their assigned work. 
+  2. Skip button which gives a hint to solve the problem
