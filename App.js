@@ -8,6 +8,7 @@ import SignUpScreen from './SignUpScreen';
 import StudentScreen from './StudentScreen';
 import InstructionScreen from './InstructionScreen';
 import GameScreen from './GameScreen';
+import RankingScreen from './RankingScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Instruction" component={InstructionScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
+        <Stack.Screen name="Ranking" component={RankingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#245DB1',
     padding: 10,
-    borderRadius: 5
+    borderRadius: 10
   },
   buttonText: {
     color: '#fff',

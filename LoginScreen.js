@@ -21,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
         const errorMessage = error.message;
         console.log(`Error logging in: ${errorCode} ${errorMessage}`);
         // Show an error message to the user
-        alert("Incorrect username or password. Please try again.");
+        alert("Incorrect username or password. Please try again.")
       });
   };
   
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 10,
     paddingHorizontal: 10,
     marginBottom: 10,
   },

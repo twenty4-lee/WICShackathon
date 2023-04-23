@@ -70,14 +70,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'top',
     paddingHorizontal: 20,
     backgroundColor: '#fff',
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginTop: 100,
+    marginBottom: 50,
   },
   input: {
     width: '100%',
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     backgroundColor: '#007AFF',
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,

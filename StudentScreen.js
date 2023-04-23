@@ -19,6 +19,12 @@ export default function StudentScreen() {
       >
         <Text style={styles.buttonText}>Play</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Ranking')}
+      >
+        <Text style={styles.buttonText}>Ranking</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -37,9 +43,9 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#FF5768',
     padding: 10,
-    borderRadius: 5,
-    marginBottom: 20,
-    width: 200, // add fixed width
+    borderRadius: 10,
+    marginBottom: 80,
+    width: 300, // add fixed width
     height: 50, // add fixed height
   },
   buttonText: {
