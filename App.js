@@ -8,6 +8,7 @@ import SignUpScreen from './SignUpScreen';
 import StudentScreen from './StudentScreen';
 import InstructionScreen from './InstructionScreen';
 import GameScreen from './GameScreen';
+import SettingsScreen from './SettingsScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Instruction" component={InstructionScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
