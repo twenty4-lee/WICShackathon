@@ -1,13 +1,30 @@
+import { auth } from "./firebase-config";
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Handle login logic here
+    signInWithEmailAndPassword(auth, username + "@example.com", password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log('Logged in user:', user.uid);
+        // Navigate to the home screen or any other screen you want to show after login
+        navigation.navigate('Student');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(`Error logging in: ${errorCode} ${errorMessage}`);
+        // Show an error message to the user
+        alert("Incorrect username or password. Please try again.");
+      });
   };
+  
 
   const handleSignUp = () => {
     navigation.navigate('SignUp');

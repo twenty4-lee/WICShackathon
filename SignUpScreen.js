@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { auth } from "./firebase-config";
+import { createUserWithEmailAndPassword } from "@firebase/auth"
 
 const SignUpScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -11,13 +13,22 @@ const SignUpScreen = ({ navigation }) => {
       alert('Please fill in all the fields.');
       return;
     }
-    if (password !== confirmPassword) {
-      alert('Passwords do not match.');
+    if (password.length < 8) {
+      alert('Password must be at least 8 characters long.');
       return;
     }
-    // Perform sign-up logic here
-    alert('You have successfully signed up!');
-    navigation.navigate('Login');
+    if (password != confirmPassword){
+      alert('Passwords do not match. Please try again.');
+      return;
+    }
+    createUserWithEmailAndPassword(auth,username + "@example.com", password)
+      .then(() => {
+        alert('You have successfully signed up!');
+        navigation.navigate('Login');
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
   
 
@@ -53,6 +64,7 @@ const SignUpScreen = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
