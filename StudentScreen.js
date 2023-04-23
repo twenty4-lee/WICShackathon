@@ -23,7 +23,7 @@ export default function StudentScreen() {
         style={styles.button}
         onPress={() => navigation.navigate('Ranking')}
       >
-        <Text style={styles.buttonText}>Ranking</Text>
+        <Text style={styles.buttonText}>Setting</Text>
       </TouchableOpacity>
     </View>
   );

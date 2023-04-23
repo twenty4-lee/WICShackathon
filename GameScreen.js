@@ -15,9 +15,6 @@ export default function GameScreen() {
       setQuestionNumber(questionNumber + 1);
       setTries(3);
       setResult([]);
-      const { target, terms } = generateEquation();
-      setGoalNumber(target);
-      populateCards(terms);
     } else {
       setGameOver(true);
     }
@@ -29,16 +26,21 @@ export default function GameScreen() {
   }, []);
 
   // generate six random numbers for the cards
-  useEffect(() => {
+  function generateRandomNumbers(numCards) {
     const randomNumbers = [];
-    while (randomNumbers.length < 6) {
+    while (randomNumbers.length < numCards) {
       const number = Math.floor(Math.random() * 16) + 1;
       if (!randomNumbers.includes(number)) {
         randomNumbers.push(number);
       }
     }
-    setCards(randomNumbers);
+    return randomNumbers;
+  }
+  useEffect(() => {
+    const cards = generateRandomNumbers(6);
+    setCards(cards);
   }, [points]);
+  
 
   const handleCardPress = (number) => {
     let isValid = true;
@@ -56,6 +58,7 @@ export default function GameScreen() {
         newCards.splice(cardIndex, 1);
         setCards(newCards);
       }
+
     }      
   };
 
@@ -72,6 +75,9 @@ export default function GameScreen() {
     } else {
       alert("Sorry, the calculated result does not match the goal number.");
       setTries(tries - 1);
+      if (tries == 0){
+        setGameOver(true);
+      }
     }
   };
   
@@ -91,6 +97,11 @@ export default function GameScreen() {
 
 const handleSkip = () => {
   nextQuestion();
+  clearResult();
+  setGoalNumber(Math.floor(Math.random() * 16) + 1);
+  const cards = generateRandomNumbers(6);
+  setCards(cards);
+  
 };
 
   return (
@@ -112,7 +123,7 @@ const handleSkip = () => {
   <TouchableOpacity style={styles.saveBtn} onPress={() => { clearResult(); handleSave(setCards, cards); }}>
     <Text style={styles.saveBtnText}>Save</Text>
   </TouchableOpacity>
-  <TouchableOpacity style={styles.submitBtn} onPress={() => { handleSubmit(); }}>
+  <TouchableOpacity style={styles.submitBtn} onPress={() => { handleSubmit(); clearResult(); setGoalNumber(Math.floor(Math.random() * 16) + 1);}}>
     <Text style={styles.submitBtnText}>Submit</Text>
   </TouchableOpacity>
 </View>
@@ -180,6 +191,11 @@ const styles = StyleSheet.create({
     color: "#333",
     marginBottom: 10,
   },
+  questionNumber: {
+    fontSize: 18,
+    textAlign: "center",
+    marginBottom: 20,
+  },
   tries: {
     fontSize: 18,
     textAlign: "center",
@@ -189,6 +205,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginBottom: 10,
+  },
+  skipBtn: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    backgroundColor: "#333",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+  },
+  skipBtnText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+
+    color: "#FFF",
   },
 
     resultContainer: {

@@ -7,13 +7,13 @@ const InstructionScreen = () => {
       <Text style={styles.title}>Instructions</Text>
       <ScrollView style={styles.textContainer}>
         <Text style={styles.text}>
-          1. The computer displays a set of 5 cards within the range of 1-16.
+          Welcome to MathMania!
         </Text>
         <Text style={styles.text}>
-          2. A target number is shown.
+          To play the game, create the number on the top row using the numbers on the bottom row and arithmetic operators.
         </Text>
         <Text style={styles.text}>
-          3. Make an equation such that, at the end, the number on the target card should be equal to the equation made.
+          You can save combinations of numbers using the save button. 
         </Text>
       </ScrollView>
     </View>
@@ -23,7 +23,7 @@ const InstructionScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFEE',
     alignItems: 'center',
     justifyContent: 'center',
   },
