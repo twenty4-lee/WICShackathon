@@ -12,17 +12,27 @@ import { RootStackParamList } from "./App";
 
 
 
-const SettingsScreen: React.FC<StackScreenProps<RootStackParamList, "Settings">> = ({ navigation }) => {
-  const [allowAdd, setAllowAdd] = useState(true);
-  const [allowSubtract, setAllowSubtract] = useState(true);
-  const [allowMultiply, setAllowMultiply] = useState(false);
-  const [allowDivide, setAllowDivide] = useState(false);
-  const [allowNegativeNumbers, setAllowNegativeNumbers] = useState(false);
-  const [maxTargetNumber, setMaxTargetNumber] = useState(20);
-  const [numQuestions, setNumQuestions] = useState(10);
-  const [numTries, setNumTries] = useState(3);
-  const [unlimitedTries, setUnlimitedTries] = useState(false);
-  const [useModifiedScoring, setUseModifiedScoring] = useState(true);
+const SettingsScreen: React.FC<StackScreenProps<RootStackParamList, "SettingsScreen">> = ({ navigation, route }) => {
+  const {
+    allowNegativeNumbers: defaultAllowNegativeNumbers = false,
+    operandDifficulty: defaultOperandDifficulty = ["add", "subtract"],
+    maxTargetNumber: defaultMaxTargetNumber = 20,
+    numQuestions: defaultNumQuestions = 10,
+    numTries: defaultNumTries = 3,
+    useModifiedScoring: defaultUseModifiedScoring = true,
+  } = route.params || {};
+
+  // Replace the useState initial values with the default values from route.params
+  const [allowAdd, setAllowAdd] = useState(defaultOperandDifficulty.includes("add"));
+  const [allowSubtract, setAllowSubtract] = useState(defaultOperandDifficulty.includes("subtract"));
+  const [allowMultiply, setAllowMultiply] = useState(defaultOperandDifficulty.includes("multiplication"));
+  const [allowDivide, setAllowDivide] = useState(defaultOperandDifficulty.includes("division"));
+  const [allowNegativeNumbers, setAllowNegativeNumbers] = useState(defaultAllowNegativeNumbers);
+  const [maxTargetNumber, setMaxTargetNumber] = useState(defaultMaxTargetNumber);
+  const [numQuestions, setNumQuestions] = useState(defaultNumQuestions);
+  const [numTries, setNumTries] = useState(defaultNumTries);
+  const [unlimitedTries, setUnlimitedTries] = useState(defaultNumTries === -1);
+  const [useModifiedScoring, setUseModifiedScoring] = useState(defaultUseModifiedScoring);
 
 
   const OperandButton = ({ operand, isActive, onPress }) => {
@@ -40,6 +50,7 @@ const SettingsScreen: React.FC<StackScreenProps<RootStackParamList, "Settings">>
   };
 
   const saveSettings = () => {
+    console.log("Saving settings...");
     navigation.navigate("GameScreen", {
       allowNegativeNumbers,
       operandDifficulty: [
@@ -47,12 +58,13 @@ const SettingsScreen: React.FC<StackScreenProps<RootStackParamList, "Settings">>
         ...(allowSubtract ? ["subtract"] : []),
         ...(allowMultiply ? ["multiplication"] : []),
         ...(allowDivide ? ["division"] : []),
-      ],
+      ] as string[], // Add the type assertion here
       maxTargetNumber,
       numQuestions,
       numTries: unlimitedTries ? -1 : numTries,
       useModifiedScoring,
     });
+    console.log("Settings saved!");
   };
 
   return (
@@ -150,6 +162,7 @@ const SettingsScreen: React.FC<StackScreenProps<RootStackParamList, "Settings">>
 </View>
   );
 };
+export default SettingsScreen;
 
   
 const styles = StyleSheet.create({
@@ -196,4 +209,3 @@ const styles = StyleSheet.create({
     },
     });
 
-  export default SettingsScreen;

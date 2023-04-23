@@ -19,7 +19,14 @@ export type RootStackParamList = {
     numTries: number;
     useModifiedScoring: boolean;
   };
-  Settings: undefined;
+  SettingsScreen: {
+    allowNegativeNumbers?: boolean;
+    operandDifficulty?: string[];
+    maxTargetNumber?: number;
+    numQuestions?: number;
+    numTries?: number;
+    useModifiedScoring?: boolean;
+  };
   Home: undefined;
   Student: undefined;
   Login: undefined;
@@ -27,6 +34,7 @@ export type RootStackParamList = {
   Instruction: undefined;
   Game: undefined;
 };
+
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -40,7 +48,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Instruction" component={InstructionScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
