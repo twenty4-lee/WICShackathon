@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Slider from '@react-native-community/slider';
 import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "../App";
+import { RootStackParamList } from "./App";
 
 
 
@@ -22,6 +22,8 @@ const SettingsScreen: React.FC<StackScreenProps<RootStackParamList, "Settings">>
   const [numQuestions, setNumQuestions] = useState(10);
   const [numTries, setNumTries] = useState(3);
   const [unlimitedTries, setUnlimitedTries] = useState(false);
+  const [useModifiedScoring, setUseModifiedScoring] = useState(true);
+
 
   const OperandButton = ({ operand, isActive, onPress }) => {
     return (
@@ -49,6 +51,7 @@ const SettingsScreen: React.FC<StackScreenProps<RootStackParamList, "Settings">>
       maxTargetNumber,
       numQuestions,
       numTries: unlimitedTries ? -1 : numTries,
+      useModifiedScoring,
     });
   };
 
@@ -133,6 +136,13 @@ const SettingsScreen: React.FC<StackScreenProps<RootStackParamList, "Settings">>
       onValueChange={(value) => setUnlimitedTries(value)}
     />
   </View>
+  <View style={styles.settingRow}>
+  <Text style={styles.settingLabel}>Modified Scoring:</Text>
+  <Switch
+    value={useModifiedScoring}
+    onValueChange={(value) => setUseModifiedScoring(value)}
+  />
+</View>
 
   <TouchableOpacity style={styles.saveButton} onPress={saveSettings}>
     <Text style={styles.saveButtonText}>Save Settings</Text>

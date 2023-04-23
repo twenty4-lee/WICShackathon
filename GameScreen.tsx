@@ -7,11 +7,13 @@ export default function GameScreen({
   allowNegativeNumbers = false,
   operandDifficulty = ["add", "subtract"],
   maxTargetNumber = 20,
+  useModifiedScoring = true,
    }) {
   const [goalNumber, setGoalNumber] = useState(0);
   const [cards, setCards] = useState<number[]>([]);
   const [result, setResult] = useState<(number | string)[]>([]);
   const [points, setPoints] = useState(0);
+  
 
   const [inputBarColor, setInputBarColor] = useState(new Animated.Value(0));
   let flashingColor = "#f0f0f0";
@@ -186,16 +188,16 @@ export default function GameScreen({
           </Animated.View>
         <Text style={styles.title}>Make {goalNumber} with the cards</Text>
         <View style={styles.cardContainer}>
-          {cards.map((number) => (
-            <TouchableOpacity
-              key={number}
-              style={styles.card}
-              onPress={() => handleCardPress(number)}
-            >
-              <Text style={styles.cardText}>{number}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        {cards.map((number, index) => (
+          <TouchableOpacity
+            key={`${index}-${number}`}
+            style={styles.card}
+            onPress={() => handleCardPress(number)}
+          >
+            <Text style={styles.cardText}>{number}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
         <View style={styles.cardContainer}>
           <TouchableOpacity
             style={styles.card}

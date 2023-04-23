@@ -11,8 +11,21 @@ import GameScreen from './GameScreen';
 import SettingsScreen from './SettingsScreen';
 
 export type RootStackParamList = {
-  GameScreen: undefined;
+  GameScreen: {
+    allowNegativeNumbers: boolean;
+    operandDifficulty: string[];
+    maxTargetNumber: number;
+    numQuestions: number;
+    numTries: number;
+    useModifiedScoring: boolean;
+  };
   Settings: undefined;
+  Home: undefined;
+  Student: undefined;
+  Login: undefined;
+  SignUp: undefined;
+  Instruction: undefined;
+  Game: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
