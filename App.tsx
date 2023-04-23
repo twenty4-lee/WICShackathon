@@ -10,7 +10,12 @@ import InstructionScreen from './InstructionScreen';
 import GameScreen from './GameScreen';
 import SettingsScreen from './SettingsScreen';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  GameScreen: undefined;
+  Settings: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (

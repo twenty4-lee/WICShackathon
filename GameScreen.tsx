@@ -151,7 +151,8 @@ export default function GameScreen({
     ) : (
       <View style={styles.container}>
         {showSettings && (
-          <TouchableOpacity style={styles.settingsBtn}>
+          <TouchableOpacity style={styles.settingsBtn}
+          onPress={() => navigation.navigate('Settings')}>
             <Ionicons name="settings" size={24} color="black" />
           </TouchableOpacity>
         )}
