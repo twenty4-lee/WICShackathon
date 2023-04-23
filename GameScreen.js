@@ -5,8 +5,23 @@ export default function GameScreen() {
   const [goalNumber, setGoalNumber] = useState(0);
   const [cards, setCards] = useState([]);
   const [result, setResult] = useState([]);
-  const [score, setScore] = useState(0);
+  const [points, setPoints] = useState(0);
+  const [tries, setTries] = useState(3);
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [gameOver, setGameOver] = useState(false);
 
+  const nextQuestion = () => {
+    if (questionNumber < 10) {
+      setQuestionNumber(questionNumber + 1);
+      setTries(3);
+      setResult([]);
+      const { target, terms } = generateEquation();
+      setGoalNumber(target);
+      populateCards(terms);
+    } else {
+      setGameOver(true);
+    }
+  };
 
   // generate a random number between 1 and 16 for the goal number
   useEffect(() => {
@@ -23,7 +38,7 @@ export default function GameScreen() {
       }
     }
     setCards(randomNumbers);
-  }, []);
+  }, [points]);
 
   const handleCardPress = (number) => {
     let isValid = true;
@@ -53,8 +68,10 @@ export default function GameScreen() {
   const checkResult = (calculatedResult, goalNumber) => {
     if (calculatedResult === goalNumber) {
       alert("Congratulations! You have reached the goal number.");
+      setPoints(points + 1);
     } else {
       alert("Sorry, the calculated result does not match the goal number.");
+      setTries(tries - 1);
     }
   };
   
@@ -72,11 +89,21 @@ export default function GameScreen() {
   setResult([]);
 }
 
+const handleSkip = () => {
+  nextQuestion();
+};
+
   return (
+    gameOver ? (
+      <View style={styles.gameOverContainer}>
+        <Text style={styles.gameOverText}>Game Over</Text>
+        <Text style={styles.points}>Total Points: {points}</Text>
+      </View>
+    ) : (
   <View style={styles.container}>
-    <View style={styles.scoreboard}>
-      <Text style={styles.scoreboardText}>Score: {score}</Text>
-    </View>
+      <Text style={styles.points}>Points: {points}</Text>
+      <Text style={styles.tries}>Tries Left: {tries}</Text>
+      <Text style={styles.questionNumber}>Question: {questionNumber}/10</Text>
     <View style={styles.resultContainer}>
   {result.map((number, index) => (
     <Text key={index} style={styles.resultText}>{number}</Text>
@@ -133,11 +160,37 @@ export default function GameScreen() {
           <Text style={styles.cardText}>/</Text>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity style={styles.skipBtn} onPress={handleSkip}>
+          <Text style={styles.skipBtnText}>Skip</Text>
+        </TouchableOpacity>
     </View>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({
+  gameOverContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F0F0F0",
+  },
+  gameOverText: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 10,
+  },
+  tries: {
+    fontSize: 18,
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  points: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
     resultContainer: {
         width: '100%',
         height: 50,

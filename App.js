@@ -9,6 +9,7 @@ import StudentScreen from './StudentScreen';
 import InstructionScreen from './InstructionScreen';
 import GameScreen from './GameScreen';
 import RankingScreen from './RankingScreen';
+//import SettingScreen from './SettingScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
         <Stack.Screen name="Instruction" component={InstructionScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
         <Stack.Screen name="Ranking" component={RankingScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
