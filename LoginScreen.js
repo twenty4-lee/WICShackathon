@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   createAccountText: {
-    color: '#007aff',
+    color: '#00A5E3',
     fontWeight: 'bold',
     fontSize: 16,
   },
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   continueAsGuestText: {
-    color: '#4DA2FF',
+    color: '#FFBF65',
     fontWeight: 'bold',
     fontSize: 16,
   },

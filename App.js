@@ -43,7 +43,7 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFEE',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -53,12 +53,13 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#245DB1',
     padding: 10,
     borderRadius: 5
   },
   buttonText: {
-    color: 'white',
-    fontSize: 20
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   }
 });

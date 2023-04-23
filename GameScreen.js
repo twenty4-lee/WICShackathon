@@ -5,6 +5,8 @@ export default function GameScreen() {
   const [goalNumber, setGoalNumber] = useState(0);
   const [cards, setCards] = useState([]);
   const [result, setResult] = useState([]);
+  const [score, setScore] = useState(0);
+
 
   // generate a random number between 1 and 16 for the goal number
   useEffect(() => {
@@ -72,6 +74,9 @@ export default function GameScreen() {
 
   return (
   <View style={styles.container}>
+    <View style={styles.scoreboard}>
+      <Text style={styles.scoreboardText}>Score: {score}</Text>
+    </View>
     <View style={styles.resultContainer}>
   {result.map((number, index) => (
     <Text key={index} style={styles.resultText}>{number}</Text>

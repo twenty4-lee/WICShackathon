@@ -35,13 +35,17 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#FF5768',
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,
+    width: 200, // add fixed width
+    height: 50, // add fixed height
   },
   buttonText: {
+    fontWeight: 'bold',
     color: 'white',
     fontSize: 20,
+    textAlign: 'center',
   },
 });
